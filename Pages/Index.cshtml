@@ -1,0 +1,96 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Клининговые услуги";
+    ViewData["ActivePage"] = "Index";
+}
+
+<!-- page title -->
+<div class="d-flex justify-content-center align-items-center blue-gradient" style="height: 240px">
+    <h1 class="display-4 text-white my-auto">Клининговые услуги</h1>
+</div>
+
+<!-- white background content -->
+<div class="d-flex justify-content-center bg-white py-md-5 py-2">
+    <!-- content -->
+    <div class="container">
+        <!-- filter and items -->
+        <div class="row">
+            <!-- filters -->
+            <div class="col-md-3 mb-3">
+                <div class="bg-white p-2 d-flex flex-column">
+                    <h5>Фильтр услуг</h5>
+                    <div class="form-check">
+                        <input class="form-check-input red-background-checked shadow-none" type="checkbox" value=""
+                               id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Уборка квартир
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input red-background-checked shadow-none" type="checkbox" value=""
+                               id="officeFilter" checked>
+                        <label class="form-check-label" for="officeFilter">
+                            Уборка офисов
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input red-background-checked shadow-none" type="checkbox" value=""
+                               id="generalFilter" checked>
+                        <label class="form-check-label" for="generalFilter">
+                            Генеральная уборка
+                        </label>
+                    </div>
+                    <div class="align-self-center w-auto mt-3">
+                        <button type="button" class="btn red-button text-white  shadow-none">Применить</button>
+                    </div>
+                </div>
+            </div>
+            <!-- items -->
+            <div class="col-md-9">
+                @foreach (var ad in Model.Ads)
+                {
+                    <!-- item -->
+                    <div class="mt-2 shadow-lg rounded bg-white position-relative p-3">
+                        <div class="row p-0 justify-content-center">
+                            <!-- ad images -->
+                            <div class="col-auto preview-image rounded"
+                                 style="background-image: url('@("/images/" + ad.ImageName)')">
+                            </div>
+                            <!-- ad info -->
+                            <div class="col-xxl-7 col-xl-6 col-lg-5 col row" style="min-width: 200px">
+                                <!-- name -->
+                                <h4 class="text-black">@ad.Name</h4>
+                                <!-- price -->
+                                <h5 class="fw-bold">@ad.Price руб.</h5>
+                                <!-- services -->
+                                <div class="text-break  text-truncate" style="max-height: 75px;">
+                                    @foreach (var service in ad.Services)
+                                    {
+                                        <div>@("- " + service.Name)</div>
+                                    }
+                                </div>
+                                <!-- description -->
+                                <div class="row mt-2 text-muted" style="max-height: 50px; overflow: hidden;">
+                                    <div>@ad.Description</div>
+                                </div>
+                                <!-- city -->
+                                <div class="text-break">@ad.City</div>
+                            </div>
+                            <!-- user picture, name -->
+                            <div class="col-lg-auto ms-auto d-none d-lg-flex flex-column align-items-center"
+                                 style="width: 170px">
+                                <img class="rounded" src=@("/images/" + ad.User.ImageName) alt="Not Found"/>
+                                <div class="text-muted fw-bold text-center  text-truncate w-100">
+                                    @ad.User.Name
+                                </div>
+                            </div>
+                        </div>
+                        <!-- link -->
+                        <a class="stretched-link" asp-page="/Ads/View" asp-route-adid="@ad.AdId"></a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

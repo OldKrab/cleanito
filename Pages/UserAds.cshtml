@@ -1,0 +1,67 @@
+﻿@page
+@model UserAdsModel
+@{
+    ViewData["Title"] = "Объявления " + Model.CurrentUser.Name;
+    ViewData["ActivePage"] = "UserAds";
+}
+
+<!-- page title -->
+<div class="d-flex justify-content-center align-items-center blue-gradient" style="height: 140px">
+    <h1 class="display-4 text-white my-auto">Мои объявления</h1>
+</div>
+
+<!-- white background content -->
+<div class="d-flex justify-content-center bg-white py-5">
+    <!-- content -->
+    <div class="container">
+        <div class="mx-auto" style="max-width: 500px;">
+            <a class="btn blue-button text-white w-100" asp-page="/Ads/Create">Добавить новое объявление</a>
+        </div>
+        <!-- items -->
+        <div class="row mt-3">
+            @foreach (var ad in Model.UserAds)
+            {
+                <!-- item -->
+                <div class="mt-2 shadow-lg rounded bg-white p-3">
+                    <div class="row p-0 justify-content-center  ">
+                        <!-- ad images -->
+                        <div class="col-auto preview-image rounded position-relative"
+                             style="background-image: url('@("/images/" + ad.ImageName)')">
+                            <!-- link -->
+                            <a class="stretched-link" asp-page="/Ads/View" asp-route-adid="@ad.AdId"></a>
+                        </div>
+                        <!-- ad info -->
+                        <div class="col-lg-9 col row" style="min-width: 250px">
+                            <!-- name -->
+                            <h4 class="text-black">@ad.Name</h4>
+                            <!-- price -->
+                            <h5 class="fw-bold">@ad.Price руб.</h5>
+                            <!-- services -->
+                            <div class="text-break  text-truncate" style="max-height: 75px;">
+                                @foreach (var service in ad.Services)
+                                {
+                                    <div>@("- " + service.Name)</div>
+                                }
+                            </div>
+                            <!-- description -->
+                            <div class="row mt-2 text-muted " style="max-height: 75px; overflow: hidden;">
+                                <div>@ad.Description</div>
+                            </div>
+                            <!-- buttons -->
+                            <div class="row justify-content-end p-3">
+                                <a class="col-md-auto btn blue-button text-white"
+                                    asp-page="Ads/Update" asp-route-adid="@ad.AdId">
+                                    Редактировать
+                                </a>
+                                <a class="col-md-auto btn btn-danger text-white mt-2 mt-md-0 ms-2"
+                                   asp-page="Ads/Delete" asp-route-adid="@ad.AdId">
+                                    Удалить
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

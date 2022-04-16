@@ -1,0 +1,100 @@
+.blue-gradient {
+  background: linear-gradient(to right, #a8dadc, #457b9d);
+}
+
+
+
+/* Navigation bar */
+.navbar, footer {
+  background-color: #1d3557;
+}
+
+.nav-link.active, .red-color {
+  color: #e2856e !important;
+}
+
+.navbar-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Buttons */
+.red-button {
+  background-color: #e2856e !important;
+  border-color: #e2856e !important;
+}
+
+.red-button:hover {
+  background-color: #cf7966 !important;
+  border-color: #cf7966 !important;
+}
+
+.blue-button {
+  background-color: #457b9d !important;
+  border-color: #457b9d !important;
+}
+
+.blue-button:hover {
+  background-color: #396581 !important;
+  border-color: #396581 !important;
+}
+
+/* Checkboxes */
+.red-background-checked:checked {
+  background-color: #e2856e !important;
+}
+
+.red-background-checked {
+  border-color: #e2856e !important;
+}
+
+/* Images */
+.preview-image {
+  min-height: 200px;
+  width: 250px;
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-item{
+  background-color: rgba(0,0,0,0.1);
+}
+
+.carousel-indicators button{
+  height: 8px!important;
+}
+
+.ad-image {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.carousel-control-prev:hover, .carousel-control-next:hover{
+  background-color: rgba(0,0,0,0.25);
+}
+
+
+.blue-background{
+  background-color: #457b9d !important;
+}
+
+.red-background{
+  background-color: #cf7966 !important;
+}
+
+.form-control:focus{
+  border-color: #cf7966!important;
+  box-shadow: 0 0 0 0.20rem #cf79669f !important;
+}
+
+
+/* Images in edit */
+.edit-ad-image {
+  height: 100px;
+  width: 100px;
+
+}

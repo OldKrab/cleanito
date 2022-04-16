@@ -1,0 +1,107 @@
+﻿@page
+@model UpdateModel
+@{
+    ViewData["Title"] = "Редактирование объявления";
+}
+<!-- item info -->
+<div class="d-flex justify-content-center bg-white py-5">
+    <div class="rounded shadow-lg w-100 mx-auto p-4" style="max-width: 750px">
+        <div class="container my-3">
+            <h2 class="fw-bold my-4">Редактирование объявления</h2>
+            <form method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="AdId">
+                <div class="row">
+                    <div asp-validation-summary="All"></div>
+                </div>
+                <!--name-->
+                <div class="row mt-4">
+                    <div class="col-sm-3">
+                        <label asp-for="AdVM.Name" class="form-label text-muted">Название</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input asp-for="AdVM.Name" class="form-control">
+                    </div>
+                </div>
+                <!--description-->
+                <div class="row mt-4">
+                    <div class="col-sm-3">
+                        <label asp-for="AdVM.Description" class="form-label text-muted">Описание</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input asp-for="AdVM.Description" class="form-control">
+                    </div>
+                </div>
+                <!--price-->
+                <div class="row mt-4">
+                    <div class="col-sm-3">
+                        <label asp-for="AdVM.Price" class="form-label text-muted">Цена</label>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="input-group d-flex w-100">
+                            <input asp-for="AdVM.Price" class="form-control">
+                            <span class="input-group-text">руб.</span>
+                        </div>
+                    </div>
+                </div>
+                <!--city-->
+                <div class="row mt-4">
+                    <div class="col-sm-3">
+                        <label asp-for="AdVM.City" class="form-label text-muted">Город</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input asp-for="AdVM.City" class="form-control">
+                    </div>
+                </div>
+                <!-- services -->
+                <div class="row mt-4">
+                    <div class="col-sm-3">
+                        <div>Услуги</div>
+                    </div>
+                    <div class="col-sm-9">
+                        @foreach (var service in Model.AllServices)
+                        {
+                            <div class="form-check">
+                                <input name="AdVM.ServicesIds" class="form-check-input red-background-checked shadow-none" type="checkbox"
+                                       value="@service.ServiceId" id="@service.ServiceId"
+                                       @if (Model.AdVM.ServicesIds.Contains(service.ServiceId))
+                                       {
+                                           @("checked")
+                                       }>
+                                <label for="@service.ServiceId" class="form-label text-muted">@service.Name</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- images -->
+                <div class="row mt-4">
+                    <div class="col-sm-3">
+                        <label asp-for="AdVM.Image" class="form-label text-muted">Изображения</label>
+                    </div>
+                    <div class="col-sm-9">
+                        @if (!string.IsNullOrEmpty(Model.ImageName))
+                        {
+                            <div class="preview-image rounded"
+                                 style="background-image: url('/images/@Model.ImageName')">
+                            </div>
+                            <div>
+                                <input type="checkbox" asp-for="IsDeletePreviousImage">
+                                <label asp-for="IsDeletePreviousImage">Удалить изображение</label>
+                            </div>
+                            <text> Заменить изображение: </text>
+                        }
+                        <input asp-for="AdVM.Image" class="form-control">
+                    </div>
+                </div>
+                <!-- buttons -->
+                <div class="row justify-content-center mt-5">
+                    <div class="col-md-5">
+                        <a class="w-100 btn btn-secondary" asp-page="/UserAds">Отмена</a>
+                    </div>
+                    <div class="col-md-6 offset-md-1 mt-2 mt-md-0">
+                        <button class="w-100 btn blue-button text-white">Сохранить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

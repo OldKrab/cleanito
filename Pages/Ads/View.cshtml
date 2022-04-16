@@ -1,0 +1,109 @@
+﻿@page
+@model ViewModel
+@{
+    ViewData["Title"] = Model.Ad.Name;
+}
+<!-- white background content -->
+<div class="">
+    <!-- item info -->
+    <div class="container my-4" style="max-width: 1000px">
+        <!-- images, price, user -->
+        <div class="row ">
+            <!-- name, images -->
+            <div class="col-md-7 p-0">
+                <!-- name -->
+                <h3 class="text-black fw-bold ms-3">@Model.Ad.Name</h3>
+                <!-- images -->
+                <div id="carouselImages" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                    <div class="carousel-indicators m-0 bg-opacity-25 bg-black mx-auto">
+                        <button type="button" data-bs-target="#carouselImages"
+                                data-bs-slide-to="0"
+                                class="active" aria-current="true"
+                                aria-label="Slide 1">
+                        </button>
+                    </div>
+                    <div class="carousel-inner" style="height: 40vh; min-height: 250px;">
+                        <div class="carousel-item active h-100">
+                            <img src="/images/@Model.Ad.ImageName" class="ad-image d-block" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselImages"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+            <!-- price, user -->
+            <div class="col-md-5 ps-3">
+                <!-- price -->
+                <h3 class="fw-bold mt-md-0 mt-3">@Model.Ad.Price руб.</h3>
+                <!-- phone -->
+                <div class="mt-4">
+                    <h5 class="m-0 mb-1">Номер телефона</h5>
+                    <h5 class="blue-background text-white rounded fw-bold d-flex justify-content-center align-items-center p-2">
+                        @Model.Ad.User.Phone
+                    </h5>
+                </div>
+                <!-- user picture, name -->
+                <div class="row justify-content-center mt-4">
+                    <div class="col">
+                        <h5 class="text-muted ">@Model.Ad.User.Name</h5>
+                        <div class="">
+                            @if (Model.Ad.User.IsIndividual)
+                            {
+                                <text>Физическое лицо</text>
+                            }
+                            else
+                            {
+                                <text>Юридическое лицо</text>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <img class="rounded w-auto" src="/images/@Model.Ad.User.ImageName" alt="Not Found"/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- description -->
+        <div class="row mt-3">
+            <div class="col-md-7 col" style="height: 450px;">
+                <!-- city -->
+                <div class="row py-3 border-bottom">
+                    <div class="col-3 text-muted">
+                        Город
+                    </div>
+                    <div class="col-9">
+                        @Model.Ad.City
+                    </div>
+                </div>
+                <!-- services -->
+                <div class="row py-3 border-bottom">
+                    <div class="col-3 text-muted">
+                        Услуги
+                    </div>
+                    <div class="col-9">
+                        @foreach (var service in Model.Ad.Services)
+                        {
+                            <div>@service.Name</div>
+                        }
+                    </div>
+                </div>
+                <!-- description -->
+                <div class="row mt-3">
+                    <div class="col-3 text-muted">
+                        Описание
+                    </div>
+                    <div class="col-9">
+                        <div>@Model.Ad.Description</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
